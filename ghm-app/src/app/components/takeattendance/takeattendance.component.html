@@ -1,0 +1,66 @@
+<br><br><br><br>
+
+
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<div class="vertical-align-wrap">
+			<div class="vertical-align-middle">
+				<div class="auth-box ">
+					<div class="left">
+						<div class="content">
+							<div class="header">
+                 
+                <div class="logo text-center"><img src="assets/img/logo-dark1.png" alt="Klorofil Logo"></div>
+                
+								<p class="lead"></p>
+								<ngx-flash-messages></ngx-flash-messages>
+              </div>
+              <div *ngIf= "status == 0; then yes"></div>
+              <div *ngIf= "status == 1; then no"></div>
+              <ng-template #yes>  
+							<form class="form-auth-small" action="index.php">
+								
+								<div class="form-group">
+									<label for="signin-password" class="control-label sr-only">Registration Number</label>
+									Check Back Later There Is No Attendance Session
+								</div>
+							
+							
+							
+              </form>
+              </ng-template>
+              <ng-template #no>  
+                  <form class="form-auth-small" action="index.php">
+                    
+                    <div class="form-group">
+                      <label for="signin-password" class="control-label sr-only">Registration Number</label>
+                      <input type="text" class="form-control"  [(ngModel)]="regno" name="regno" value="" placeholder="Registration Number">
+                    </div>
+                  
+                    <button type="submit" (click)="takeattendance()" class="btn btn-primary btn-lg btn-block">Submit</button>
+                  
+                  </form>
+                  </ng-template>
+						</div>
+					</div>
+					<div class="right">
+            
+            <div class="overlay"></div>
+          
+						<div class="content text">
+                <analogical-countdown *ngIf ="status == 1" [time]="900000" (beep)="stop()"></analogical-countdown>
+							<h1 class="heading">GHM Attendance Apllication</h1>
+              <p>by SteveInc</p>
+              <br>
+              Links
+              <br>
+               <p><a [routerLink] ="['/login']" > <span colour=#fffff>Login</span></a></p>
+               
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END WRAPPER -->

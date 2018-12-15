@@ -1,0 +1,47 @@
+<br><br><br><br>
+
+
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<div class="vertical-align-wrap">
+			<div class="vertical-align-middle">
+				<div class="auth-box ">
+					<div class="left">
+						<div class="content">
+							<div class="header">
+								<div class="logo text-center"><img src="assets/img/logo-dark1.png" alt="Klorofil Logo"></div>
+								<p class="lead">Login to your account</p>
+								<ngx-flash-messages></ngx-flash-messages>
+							</div>
+							<form class="form-auth-small" action="index.php">
+								
+								<div class="form-group">
+									<label for="signin-password" class="control-label sr-only">Registration Number</label>
+									<input type="text" class="form-control"  [(ngModel)]="regno" name="regno" value="" placeholder="Registration Number">
+								</div>
+								
+								<div class="form-group">
+									<label for="signin-password" class="control-label sr-only">password</label>
+									<input type="password" [(ngModel)]="password" name="passsword" class="form-control" value="" placeholder="password">
+								</div>
+								<button type="submit" (click)="login()" class="btn btn-primary btn-lg btn-block">Login</button>
+							
+							</form>
+						</div>
+					</div>
+					<div class="right">
+						<div class="overlay"></div>
+						<div class="content text">
+							<h1 class="heading">GHM Attendance Apllication</h1>
+							<p>by SteveInc</p>
+							<br>
+							Links<br>
+               <p><a [routerLink] ="['/takeattendance']" > <span colour=#fffff>TakeAttendance</span></a></p>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END WRAPPER -->

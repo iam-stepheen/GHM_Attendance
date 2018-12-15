@@ -1,0 +1,80 @@
+<br><br><br><br><br>
+	<!-- WRAPPER -->
+	<div id="wrapper">
+		<div class="vertical-align-wrap">
+			<div class="vertical-align-middle">
+				<div class="auth-box ">
+					<div class="left">
+						<div class="content">
+							<div class="header">
+								<div class="logo text-center"></div>
+								<p class="lead">Register A New Member</p>
+								<ngx-flash-messages></ngx-flash-messages>
+							</div>
+							<form class="form-auth-small" action="index.php">
+								<div class="form-group">
+									<label for="signin-email" class="control-label sr-only">FirstName</label>
+									<input type="text" [(ngModel)] = "firstname" name="firstname" class="form-control"  placeholder="FirstName">
+								</div>
+								<div class="form-group">
+									<label for="signin-password" class="control-label sr-only">SecondName</label>
+									<input type="text" [(ngModel)] = "secondname" name="secondname"class="form-control"  placeholder="SecondName">
+								</div>
+								<div class="form-group">
+									<label for="signin-password"  class="control-label sr-only">Level</label>
+									<select class="form-control" [(ngModel)] = "level" name="level">
+										<option value="cheese">Level</option>
+										<option value="1">100 Level</option>
+										<option value="1">200 Level</option>
+										<option value="2">300 Level</option>
+										<option value="2">400 Level</option>
+										<option value="2">500 Level</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="signin-password"  class="control-label sr-only">Unit</label>
+									<select class="form-control"[(ngModel)]="unit" name="unit">
+										<option value="">Sub-Unit</option>
+										<option value="Audio" >Audio</option>
+										<option value="Visual">Visual</option>
+									</select>
+                </div>
+                
+								<div class="form-group">
+									<label for="signin-password" class="control-label sr-only">Email</label>
+									<input type="text" [(ngModel)] = "email" name="email"class="form-control"   placeholder="Email">
+								</div>
+								<div class="form-group">
+									<label for="signin-password" class="control-label sr-only">RegistrationNumber</label>
+									<input type="text" [(ngModel)] = "regno" name="regno"class="form-control"   placeholder="Registration Number">
+								</div>
+								
+                <div class="form-group">
+									<label for="signin-password" class="control-label sr-only">Register As</label>
+									<select class="form-control" [(ngModel)] = "status" name="status">
+										<option value="1">Admin</option>
+										<option value="0">Member</option>
+										
+									</select>
+								</div>
+								<button type="submit" class="btn btn-primary btn-lg btn-block" (click)='register()'>Register</button>
+							
+							</form>
+						</div>
+					</div>
+					<div class="right">
+						<div class="overlay"></div>
+						<div class="content text">
+							<h1 class="heading">GHM Attendance Apllication</h1>
+							<p>by SteveInc</p>
+							<br>
+               <p><a [routerLink] ="['/login']" > <span colour=#fffff>Login</span></a></p>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- END WRAPPER -->
+

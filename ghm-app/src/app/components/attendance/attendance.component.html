@@ -1,0 +1,277 @@
+
+	<!-- WRAPPER -->
+	<div id="wrapper" *ngIf ="status ==1">
+		<!-- NAVBAR -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="brand">
+						<strong>GILGAL HOUSE MEDIA</strong>
+					</div>
+				<div class="container-fluid">
+					<div class="navbar-btn">
+						<button type="button" class="btn-toggle-fullwidth"></button>
+					</div>
+					<form class="navbar-form navbar-left">
+						<div class="input-group">
+						
+							
+						</div>
+					</form>
+					
+					<div id="navbar-menu">
+						<ul class="nav navbar-nav navbar-right">
+						
+							
+							<li class="dropdown">
+								<a  class="dropdown-toggle" data-toggle="dropdown"> <span></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+								<ul class="dropdown-menu">
+									<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
+									<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
+									<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
+									<li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+								</ul>
+							</li>
+							<!-- <li>
+								<a class="update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+							</li> -->
+						</ul>
+					</div>
+				</div>
+			</nav>
+		<!-- END NAVBAR -->
+		<!-- LEFT SIDEBAR -->
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+					<nav>
+							<ul class="nav">
+								<li><a [routerLink] ="['/dashboard']" class=""><i class="lnr lnr-home" ></i> <span>Dashboard</span></a></li>
+								<li><a [routerLink] ="['/profile']" class=""><i class="lnr lnr-code" ></i> <span>Profile</span></a></li>
+								<li><a [routerLink] ="['/attendance']" class="active"><i class="lnr lnr-code" ></i> <span>Attendance</span></a></li>
+								
+								<li><a href="" (click)="logout()" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
+								
+								
+							</ul>
+						</nav>
+			</div>
+		</div>
+		<!-- END LEFT SIDEBAR -->
+		<!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<h3 class="page-title">Attendance Section</h3>
+					<ngx-flash-messages></ngx-flash-messages>
+					<div class="row">
+						<div class="col-md-6">
+							<!-- BASIC TABLE -->
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">Create Attendance Session</h3>
+								</div>
+								
+								<div class="panel-body">
+                    <select class="form-control" [(ngModel)]='serviceday' name="serviceday">
+                        <option value="">Select Service Day</option>
+                        <option value="sunday">Sunday</option>
+                        <option value="tuesday">Tuesday</option>
+                        <option value="thursday">Thursday</option>
+                      
+                      </select><br>
+                      <input type="date" class="form-control" placeholder="Enter Date"[(ngModel)]='servicedate' name="servicedate"><br>
+                      <button type="button" class="btn btn-primary" (click)="createattendance()">Start Attendance</button><br><br>
+					  <h3 class="panel-title">Active Attendance Session</h3><br>
+					 
+									<table class="table">
+										<thead>
+											<tr >
+											
+												<th>Service Day</th>
+												<th>Service Date</th>
+												
+												<th>Stop Attendance</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr *ngFor = "let items of attendance">
+											
+												<td>{{items.service_day}}</td>
+												<td>{{items.service_date}}</td>
+												
+												<td><button type="button" class="btn btn-primary" (click)="stop(items._id)">Stop Attendance</button></td>
+											</tr>
+											
+							
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<!-- END BASIC TABLE -->
+						</div>
+						<div class="col-md-6">
+							<!-- TABLE NO PADDING -->
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">Manage Attendance Taken</h3>
+								</div>
+								<div class="panel-body no-padding">
+									<table class="table">
+										<thead>
+											<tr>
+												
+												<th>Service Day</th>
+												<th>Service Date</th>
+                        <th>Start Attendance</th>
+                        <th>Delete Attendance</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr *ngFor = "let items of attendance2">
+												
+												<td>{{items.service_day}}</td>
+												<td>{{items.service_date}}</td>
+                        <td><button type="button" class="btn btn-primary" (click)="start(items.service_day,items.service_date)">Start</button></td>
+                        <td><button type="button" class="btn btn-primary">Delete</button></td>
+											</tr>
+											
+										
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<!-- END TABLE NO PADDING -->
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<!-- TABLE STRIPED -->
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">View Present Students For a Service </h3>
+								</div>
+								<form>
+								<div class="panel-body" >
+									
+									<div >
+											<select class="form-control" [(ngModel)]='serviceatt' name="serviceatt">
+													<option [value]="items.service_date" *ngFor = "let items of attendance4">{{items.service_day}} {{items.service_date}}</option>
+													
+												  
+												  </select>
+									</div>
+									<br>
+									<button type="button" class="btn btn-primary" (click)="getattendance3()">View</button>
+									
+								</div>
+								</form>
+							</div>
+							<table class="table table-striped">
+									<thead>
+										<tr>
+											
+											<th>FirstName</th>
+											<th>SecondNames</th>
+											
+											
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor = "let items of attendance5">
+											<td>{{items.firstname}}</td>
+											<td>{{items.secondname}}</td>
+											
+											
+											
+										</tr>
+										
+										
+										
+										
+		
+									</tbody>
+								</table>
+							<!-- END TABLE STRIPED -->
+						</div>
+						<div class="col-md-6">
+							<!-- TABLE HOVER -->
+							<div class="panel">
+									<div class="panel-heading">
+										<h3 class="panel-title">View Attendance For a Member </h3>
+									</div>
+									<div class="panel-body" >
+										<form>
+										<div >
+												<select class="form-control" [(ngModel)]='studentregno' name="studentregno">
+														<option [ngValue]="items.regno"
+														*ngFor = "let items of student">{{items.firstname}} {{items.secondname}}</option>
+														
+													  
+													  </select>
+										</div>
+										<br>
+										<button type="button" class="btn btn-primary" (click)= "getmemberattendance()">View</button>
+									</form>	
+									</div>
+									<table class="table table-striped">
+											<thead>
+												<tr>
+													
+													<th>Service Day</th>
+													<th>Service Date</th>
+													
+													<th>Status</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr *ngFor = "let items of attendance3">
+													<td><a>{{items.service_day}}</a></td>
+													<td>{{items.service_date}}</td>
+													
+													
+													<td><span class="{{items.class}}">{{items.service_status}}</span></td>
+												</tr>
+												
+												
+												
+												
+				
+											</tbody>
+										</table>
+								</div>
+														
+							<!-- END TABLE HOVER -->
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<!-- BORDERED TABLE -->
+							
+							<!-- END BORDERED TABLE -->
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+		</div>
+		<!-- END MAIN -->
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container-fluid">
+				<p class="copyright">&copy; 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
+			</div>
+		</footer>
+	</div>
+
+	
+	
+
+ 
+	<!-- END WRAPPER -->
+	<!-- Javascript -->
+	<script src="assets/vendor/jquery/jquery.min.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="assets/scripts/klorofil-common.js"></script>
+
+	

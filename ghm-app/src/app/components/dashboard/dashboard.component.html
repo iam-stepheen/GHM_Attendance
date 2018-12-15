@@ -1,0 +1,576 @@
+<div *ngIf= "statuss == 1; then admin"></div>
+                  <div *ngIf= "statuss == 0; then member"></div>
+                  <ng-template #admin>   
+	<!-- WRAPPER -->
+	<div id="wrapper" *ngIf = "user">
+		<!-- NAVBAR -->
+		<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="brand">
+						<strong>GILGAL HOUSE MEDIA</strong>
+					</div>
+			<div class="container-fluid">
+
+
+				<div class="navbar-btn">
+					<button type="button" class="btn-toggle-fullwidth"></button>
+				</div>
+				<form class="navbar-form navbar-left">
+					<div class="input-group">
+					
+						
+					</div>
+				</form>
+				
+				<div id="navbar-menu">
+					<ul class="nav navbar-nav navbar-right">
+					
+						
+						<li class="dropdown">
+							<a  class="dropdown-toggle" data-toggle="dropdown"> <span>{{user.firstname}} {{user.secondname}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<ul class="dropdown-menu">
+								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
+								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
+								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
+								<li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+							</ul>
+						</li>
+						<!-- <li>
+							<a class="update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+						</li> -->
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<!-- END NAVBAR -->
+		<!-- LEFT SIDEBAR -->
+		<div id="sidebar-nav" class="sidebar">
+			<div class="sidebar-scroll">
+				<nav>
+					<ul class="nav">
+						<li><a [routerLink] ="['/dashboard']" class="active"><i class="lnr lnr-home" ></i> <span>Dashboard</span></a></li>
+						<li><a [routerLink] ="['/profile']" class=""><i class="lnr lnr-code" ></i> <span>Profile</span></a></li>
+						<li><a [routerLink] ="['/attendance']" class=""><i class="lnr lnr-code" ></i> <span>Attendance</span></a></li>
+						
+						<li><a href="" (click)="logout()" class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
+						
+						
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<!-- END LEFT SIDEBAR -->
+		<!-- MAIN -->
+		<div class="main">
+			<!-- MAIN CONTENT -->
+			<div class="main-content">
+				<div class="container-fluid">
+					<!-- OVERVIEW -->
+					<div class="panel panel-headline">
+						<div class="panel-heading">
+							<h3 class="panel-title">Attendance Overview</h3>
+							
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-3">
+									<div class="metric">
+										<span class="icon"><i class="fa fa-download"></i></span>
+										<p>
+											<span class="number">{{Total}}</span>
+											<span class="title">Total Attendance</span>
+										</p>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="metric">
+										<span class="icon"><i class="fa fa-shopping-bag"></i></span>
+										<p>
+											<span class="number">{{absent}}</span>
+											<span class="title">Times Absent</span>
+										</p>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="metric">
+										<span class="icon"><i class="fa fa-eye"></i></span>
+										<p>
+											<span class="number">{{Present}}</span>
+											<span class="title">Times Present</span>
+										</p>
+									</div>
+								</div>
+								
+							</div>
+							
+						</div>
+					</div>
+					<!-- END OVERVIEW -->
+					<div class="row">
+						<div class="col-md-6">
+							<!-- RECENT PURCHASES -->
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">Total Attendance For {{user.firstname}} {{user.secondname}} </h3>
+									<div class="right">
+										
+									</div>
+								</div>
+								<div class="panel-body no-padding">
+										<table class="table table-striped">
+												<thead>
+													<tr>
+														
+														<th>Service Day</th>
+														<th>Service Date</th>
+														
+														<th>Status</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr *ngFor = "let items of attendance3">
+														<td><a>{{items.service_day}}</a></td>
+														<td>{{items.service_date}}</td>
+														
+														
+														<td><span class="{{items.class}}">{{items.service_status}}</span></td>
+													</tr>
+													
+													
+													
+													
+					
+												</tbody>
+											</table>
+								</div>
+								<div class="panel-footer">
+								
+								</div>
+							</div>
+							<!-- END RECENT PURCHASES -->
+						</div>
+						<div class="col-md-6">
+							<!-- MULTI CHARTS -->
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">Chart for attendance goes here</h3>
+									
+								</div>
+								<div class="panel-body">
+									<div id="visits-trends-chart" class="ct-chart"></div>
+								</div>
+							</div>
+							<!-- END MULTI CHARTS -->
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-7">
+							<!-- TODO LIST -->
+							<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">To-Do List</h3>
+									<div class="right">
+										<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+										<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+									</div>
+								</div>
+								<div class="panel-body">
+									<ul class="list-unstyled todo-list">
+										<li>
+											<label class="control-inline fancy-checkbox">
+												<input type="checkbox"><span></span>
+											</label>
+											<p>
+												<span class="title">Restart Server</span>
+												<span class="short-description">Dynamically integrate client-centric technologies without cooperative resources.</span>
+												<span class="date">Oct 9, 2016</span>
+											</p>
+											<div class="controls">
+												<a href="#"><i class="icon-software icon-software-pencil"></i></a> <a href="#"><i class="icon-arrows icon-arrows-circle-remove"></i></a>
+											</div>
+										</li>
+										<li>
+											<label class="control-inline fancy-checkbox">
+												<input type="checkbox"><span></span>
+											</label>
+											<p>
+												<span class="title">Retest Upload Scenario</span>
+												<span class="short-description">Compellingly implement clicks-and-mortar relationships without highly efficient metrics.</span>
+												<span class="date">Oct 23, 2016</span>
+											</p>
+											<div class="controls">
+												<a href="#"><i class="icon-software icon-software-pencil"></i></a> <a href="#"><i class="icon-arrows icon-arrows-circle-remove"></i></a>
+											</div>
+										</li>
+										<li>
+											<label class="control-inline fancy-checkbox">
+												<input type="checkbox"><span></span>
+											</label>
+											<p>
+												<strong>Functional Spec Meeting</strong>
+												<span class="short-description">Monotonectally formulate client-focused core competencies after parallel web-readiness.</span>
+												<span class="date">Oct 11, 2016</span>
+											</p>
+											<div class="controls">
+												<a href="#"><i class="icon-software icon-software-pencil"></i></a> <a href="#"><i class="icon-arrows icon-arrows-circle-remove"></i></a>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<!-- END TODO LIST -->
+						</div>
+						<div class="col-md-5">
+							<!-- TIMELINE -->
+							<div class="panel panel-scrolling">
+								<div class="panel-heading">
+									<h3 class="panel-title">Recent User Activity</h3>
+									<div class="right">
+										<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+										<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+									</div>
+								</div>
+								<div class="panel-body">
+									<ul class="list-unstyled activity-list">
+										<li>
+											<img src="assets/img/user1.png" alt="Avatar" class="img-circle pull-left avatar">
+											<p><a href="#">Michael</a> has achieved 80% of his completed tasks <span class="timestamp">20 minutes ago</span></p>
+										</li>
+										<li>
+											<img src="assets/img/user2.png" alt="Avatar" class="img-circle pull-left avatar">
+											<p><a href="#">Daniel</a> has been added as a team member to project <a href="#">System Update</a> <span class="timestamp">Yesterday</span></p>
+										</li>
+										<li>
+											<img src="assets/img/user3.png" alt="Avatar" class="img-circle pull-left avatar">
+											<p><a href="#">Martha</a> created a new heatmap view <a href="#">Landing Page</a> <span class="timestamp">2 days ago</span></p>
+										</li>
+										<li>
+											<img src="assets/img/user4.png" alt="Avatar" class="img-circle pull-left avatar">
+											<p><a href="#">Jane</a> has completed all of the tasks <span class="timestamp">2 days ago</span></p>
+										</li>
+										<li>
+											<img src="assets/img/user5.png" alt="Avatar" class="img-circle pull-left avatar">
+											<p><a href="#">Jason</a> started a discussion about <a href="#">Weekly Meeting</a> <span class="timestamp">3 days ago</span></p>
+										</li>
+									</ul>
+									<button type="button" class="btn btn-primary btn-bottom center-block">Load More</button>
+								</div>
+							</div>
+							<!-- END TIMELINE -->
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<!-- TASKS -->
+							
+							<!-- END TASKS -->
+						</div>
+						
+						
+					</div>
+				</div>
+			</div>
+			<!-- END MAIN CONTENT -->
+		</div>
+		<!-- END MAIN -->
+		<div class="clearfix"></div>
+		<footer>
+			<div class="container-fluid">
+				<p class="copyright">&copy; 2018 . SteveInc All Rights Reserved.</p>
+			</div>
+		</footer>
+	</div>
+	<!-- END WRAPPER -->
+	<!-- Javascript -->
+	<script src="assets/vendor/jquery/jquery.min.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+	<script src="assets/vendor/chartist/js/chartist.min.js"></script>
+	<script src="assets/scripts/klorofil-common.js"></script>
+	</ng-template>
+
+	<ng-template #member>
+			<div id="wrapper" *ngIf = "user">
+					<!-- NAVBAR -->
+					<nav class="navbar navbar-default navbar-fixed-top">
+							<div class="brand">
+									<strong>GILGAL HOUSE MEDIA</strong>
+								</div>
+						<div class="container-fluid">
+							<div class="navbar-btn">
+								<button type="button" class="btn-toggle-fullwidth"></button>
+							</div>
+							<form class="navbar-form navbar-left">
+								<div class="input-group">
+								
+									
+								</div>
+							</form>
+							
+							<div id="navbar-menu">
+								<ul class="nav navbar-nav navbar-right">
+								
+									
+									<li class="dropdown">
+										<a  class="dropdown-toggle" data-toggle="dropdown"> <span>{{user.firstname}} {{user.secondname}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+										<ul class="dropdown-menu">
+											<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
+											<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
+											<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
+											<li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+										</ul>
+									</li>
+									<!-- <li>
+										<a class="update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+									</li> -->
+								</ul>
+							</div>
+						</div>
+					</nav>
+					<!-- END NAVBAR -->
+					<!-- LEFT SIDEBAR -->
+					<div id="sidebar-nav" class="sidebar">
+						<div class="sidebar-scroll">
+							<nav>
+								<ul class="nav">
+									<li><a [routerLink] ="['/dashboard']" class="active"><i class="lnr lnr-home" ></i> <span>Dashboard</span></a></li>
+									<li><a [routerLink] ="['/profile']" class=""><i class="lnr lnr-code" ></i> <span>Profile</span></a></li>
+									
+									
+									<li><a href="" (click) = "logout()"class=""><i class="lnr lnr-cog"></i> <span>Logout</span></a></li>
+									
+									
+								</ul>
+							</nav>
+						</div>
+					</div>
+					<!-- END LEFT SIDEBAR -->
+					<!-- MAIN -->
+					<div class="main">
+						<!-- MAIN CONTENT -->
+						<div class="main-content">
+							<div class="container-fluid">
+								<!-- OVERVIEW -->
+								<div class="panel panel-headline">
+									<div class="panel-heading">
+										<h3 class="panel-title">Attendance Overview</h3>
+										
+									</div>
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-md-3">
+												<div class="metric">
+													<span class="icon"><i class="fa fa-download"></i></span>
+													<p>
+														<span class="number">{{Total}}</span>
+														<span class="title">Total Attendance</span>
+													</p>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="metric">
+													<span class="icon"><i class="fa fa-shopping-bag"></i></span>
+													<p>
+														<span class="number">{{absent}}</span>
+														<span class="title">Times Absent</span>
+													</p>
+												</div>
+											</div>
+											<div class="col-md-3">
+												<div class="metric">
+													<span class="icon"><i class="fa fa-eye"></i></span>
+													<p>
+														<span class="number">{{Present}}</span>
+														<span class="title">Times Present</span>
+													</p>
+												</div>
+											</div>
+											
+										</div>
+										
+									</div>
+								</div>
+								<!-- END OVERVIEW -->
+								<div class="row">
+									<div class="col-md-6">
+										<!-- RECENT PURCHASES -->
+										<div class="panel">
+											<div class="panel-heading">
+												<h3 class="panel-title">Total Attendance For {{user.firstname}} {{user.secondname}} </h3>
+												<div class="right">
+													
+												</div>
+											</div>
+											<div class="panel-body no-padding">
+													<table class="table table-striped">
+															<thead>
+																<tr>
+																	
+																	<th>Service Day</th>
+																	<th>Service Date</th>
+																	
+																	<th>Status</th>
+																</tr>
+															</thead>
+															<tbody>
+																<tr *ngFor = "let items of attendance3">
+																	<td><a>{{items.service_day}}</a></td>
+																	<td>{{items.service_date}}</td>
+																	
+																	
+																	<td><span class="{{items.class}}">{{items.service_status}}</span></td>
+																</tr>
+																
+																
+																
+																
+								
+															</tbody>
+														</table>
+											</div>
+											<div class="panel-footer">
+											
+											</div>
+										</div>
+										<!-- END RECENT PURCHASES -->
+									</div>
+									<div class="col-md-6">
+										<!-- MULTI CHARTS -->
+										<div class="panel">
+											<div class="panel-heading">
+												<h3 class="panel-title">Chart for attendance goes here</h3>
+												
+											</div>
+											<div class="panel-body">
+												<div id="visits-trends-chart" class="ct-chart"></div>
+											</div>
+										</div>
+										<!-- END MULTI CHARTS -->
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-7">
+										<!-- TODO LIST -->
+										<div class="panel">
+											<div class="panel-heading">
+												<h3 class="panel-title">To-Do List</h3>
+												<div class="right">
+													<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+													<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+												</div>
+											</div>
+											<div class="panel-body">
+												<ul class="list-unstyled todo-list">
+													<li>
+														<label class="control-inline fancy-checkbox">
+															<input type="checkbox"><span></span>
+														</label>
+														<p>
+															<span class="title">Restart Server</span>
+															<span class="short-description">Dynamically integrate client-centric technologies without cooperative resources.</span>
+															<span class="date">Oct 9, 2016</span>
+														</p>
+														<div class="controls">
+															<a href="#"><i class="icon-software icon-software-pencil"></i></a> <a href="#"><i class="icon-arrows icon-arrows-circle-remove"></i></a>
+														</div>
+													</li>
+													<li>
+														<label class="control-inline fancy-checkbox">
+															<input type="checkbox"><span></span>
+														</label>
+														<p>
+															<span class="title">Retest Upload Scenario</span>
+															<span class="short-description">Compellingly implement clicks-and-mortar relationships without highly efficient metrics.</span>
+															<span class="date">Oct 23, 2016</span>
+														</p>
+														<div class="controls">
+															<a href="#"><i class="icon-software icon-software-pencil"></i></a> <a href="#"><i class="icon-arrows icon-arrows-circle-remove"></i></a>
+														</div>
+													</li>
+													<li>
+														<label class="control-inline fancy-checkbox">
+															<input type="checkbox"><span></span>
+														</label>
+														<p>
+															<strong>Functional Spec Meeting</strong>
+															<span class="short-description">Monotonectally formulate client-focused core competencies after parallel web-readiness.</span>
+															<span class="date">Oct 11, 2016</span>
+														</p>
+														<div class="controls">
+															<a href="#"><i class="icon-software icon-software-pencil"></i></a> <a href="#"><i class="icon-arrows icon-arrows-circle-remove"></i></a>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+										<!-- END TODO LIST -->
+									</div>
+									<div class="col-md-5">
+										<!-- TIMELINE -->
+										<div class="panel panel-scrolling">
+											<div class="panel-heading">
+												<h3 class="panel-title">Recent User Activity</h3>
+												<div class="right">
+													<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
+													<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
+												</div>
+											</div>
+											<div class="panel-body">
+												<ul class="list-unstyled activity-list">
+													<li>
+														<img src="assets/img/user1.png" alt="Avatar" class="img-circle pull-left avatar">
+														<p><a href="#">Michael</a> has achieved 80% of his completed tasks <span class="timestamp">20 minutes ago</span></p>
+													</li>
+													<li>
+														<img src="assets/img/user2.png" alt="Avatar" class="img-circle pull-left avatar">
+														<p><a href="#">Daniel</a> has been added as a team member to project <a href="#">System Update</a> <span class="timestamp">Yesterday</span></p>
+													</li>
+													<li>
+														<img src="assets/img/user3.png" alt="Avatar" class="img-circle pull-left avatar">
+														<p><a href="#">Martha</a> created a new heatmap view <a href="#">Landing Page</a> <span class="timestamp">2 days ago</span></p>
+													</li>
+													<li>
+														<img src="assets/img/user4.png" alt="Avatar" class="img-circle pull-left avatar">
+														<p><a href="#">Jane</a> has completed all of the tasks <span class="timestamp">2 days ago</span></p>
+													</li>
+													<li>
+														<img src="assets/img/user5.png" alt="Avatar" class="img-circle pull-left avatar">
+														<p><a href="#">Jason</a> started a discussion about <a href="#">Weekly Meeting</a> <span class="timestamp">3 days ago</span></p>
+													</li>
+												</ul>
+												<button type="button" class="btn btn-primary btn-bottom center-block">Load More</button>
+											</div>
+										</div>
+										<!-- END TIMELINE -->
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<!-- TASKS -->
+										
+										<!-- END TASKS -->
+									</div>
+									
+									
+								</div>
+							</div>
+						</div>
+						<!-- END MAIN CONTENT -->
+					</div>
+					<!-- END MAIN -->
+					<div class="clearfix"></div>
+					<footer>
+						<div class="container-fluid">
+							<p class="copyright">&copy; 2018 . SteveInc All Rights Reserved.</p>
+						</div>
+					</footer>
+				</div>
+				<!-- END WRAPPER -->
+				<!-- Javascript -->
+				<script src="assets/vendor/jquery/jquery.min.js"></script>
+				<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+				<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+				<script src="assets/vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js"></script>
+				<script src="assets/vendor/chartist/js/chartist.min.js"></script>
+				<script src="assets/scripts/klorofil-common.js"></script>
+	</ng-template>
